@@ -1,0 +1,455 @@
+1.import java.util.Map;
+import java.util.StringTokenizer;
+import java.util.TreeMap;
+
+public class ProgramCode 
+{
+	public static Map<String,String> getStudents(String studentsList)
+	{
+		String topper=null,looser=null;
+		int max=0,min=Integer.MAX_VALUE;
+		Map<String,String> student = new TreeMap<String,String>();
+		StringTokenizer token1=new StringTokenizer(studentsList,",");
+		while(token1.hasMoreTokens())
+		{
+			String s1=token1.nextToken();
+			StringTokenizer token2=new StringTokenizer(s1,"-");
+				String name=token2.nextToken();
+				name=Character.toUpperCase(name.charAt(0))+name.substring(1);
+				int mark=Integer.parseInt(token2.nextToken());
+				if(min>mark){
+					min=mark;
+					looser=name;
+				}
+				if(max<mark){
+					max=mark;
+			        topper=name;
+
+				}
+				
+				if(mark>=70){
+				  student.put(name,"PASS");
+				}
+				else{
+					student.put(name,"FAIL");
+				}
+		}
+			student.put(topper,"TOPPER");
+			student.put(looser,"BOOTOM");
+		return student;
+	}
+}
+
+		// Write a program to accept a list of students with marks as CSV values and perform the following tasks.
+		// Store the student details in a map.
+		// Store the name of the students with their status like "PASS" or "FAIL" based on the pass mark of 70.
+		// For the student with maximum mark - > Give the status as "TOPPER".
+		// For the student with minimum mark - >Give the status as "BOTTOM".
+		// Arrange the students based on their names in ascending order.
+		//convert the name into title case
+			
+				
+
+public class Main 
+{
+	public static void main(String[] args) 
+	{
+		String studentList="zaheer-70,raju-76,anna-34,balu-89,samar-51,nithila-90";
+		System.out.println(ProgramCode.getStudents(studentList));		
+	}
+}
+
+*****************************************************************************************************************************************
+2.
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.StringTokenizer;
+
+public class ProgramCode 
+{
+	public static String getMonth(String studentsList)
+	{
+		
+		StringTokenizer st=new StringTokenizer(studentsList,",");
+		Date dte=new Date(12-6-1865);
+		while(st.hasMoreTokens())
+		{	
+			String token=st.nextToken();
+			StringTokenizer st2=new StringTokenizer(token, "|");
+			String name=st2.nextToken();
+			String date=st2.nextToken();
+			try {
+				Date d=new SimpleDateFormat("dd-MM-yyyy").parse(date);
+				if(d.after(dte))
+				{
+					dte=d;		
+				}
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		String r=new SimpleDateFormat("MMMM").format(dte);
+		return r;
+	}
+}
+
+
+
+public class Main 
+{
+	public static void main(String[] args) 
+	{
+		String studentList="zaheer|10-8-2000,raju-|11-03-2000,anna|21-04-2001,balu|13-05-2002,samar|20-05-2000,nithila|17-10-2004";
+		System.out.println(ProgramCode.getMonth(studentList));		
+	}
+}
+
+output=october
+
+*******************************************************************************************************************************************
+3.
+import java.util.ArrayList;
+import java.util.List;
+
+public class ProgramCode 
+{
+	public static List<String> getMonth(String seriesCode)
+	{
+		List<String> list=new ArrayList<String>();
+		String s="";
+		String num="";
+        for(int i=0;i<seriesCode.length();i++){
+        Character ch=seriesCode.charAt(i);
+        if(ch.isLetter(ch) || ch=='0'){
+        	s=s+ch;
+        }
+        else{
+        	break;
+        }
+        num=seriesCode.substring(s.length());
+        }
+        for(int i=0;i<5;i++){
+        	int a=Integer.parseInt(num)+1;
+            num=Integer.toString(a);
+            String s1=s+a;
+        	list.add(s1);
+        }
+        return list;
+	}
+}
+		
+		// Write a program to accept a sample pattern and generate the next 5 , and return the list.
+		//EXAMPLES
+				// 1.   AH001  - > AH002 ,AH003,AH004 ,AH005,AH006
+				//2 .   HAWK01 - > HAWK02,HAWK02,HAWK03,HAWK05,HAWK06
+		
+
+public class Main 
+{
+	public static void main(String[] args) 
+	{
+		String seriesCode="EMP100";
+		System.out.println(ProgramCode.getMonth(seriesCode));		
+	}
+}
+
+*****************************************************************************************************************************
+4.
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.StringTokenizer;
+
+public class ProgramCode 
+{
+	public static List<String> getFruits(String seriesCode)
+	{
+		String s=null;
+		List<String> res=new ArrayList<>();
+		StringTokenizer stz=new StringTokenizer(seriesCode,",");
+		while(stz.hasMoreTokens()){
+			 s=stz.nextToken();
+			 Set<Character> fruits=new HashSet<Character>();	 
+			 char []letters=s.toCharArray();		 
+			 for(char k:letters)
+			 {
+				 fruits.add(k);
+			 }
+			 if(s.length()==fruits.size())
+			 {
+				 res.add(s);
+			 }
+			 
+		}
+			//Write a program to get a list of fruits as comma separated .
+		//Find the fruits whose characters are not duplicated
+		//Add them to a list and return.
+		return res;
+	
+	}
+
+}
+
+
+public class Main 
+{
+	public static void main(String[] args) 
+	{
+		String seriesCode="APPLE,BANANA,GRAPE,FIG,POMO,LEMON,ORANGE";
+		System.out.println(ProgramCode.getFruits(seriesCode));		
+	}
+}
+
+***********************************************************************************************************************************
+5.
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+public class ProgramCode 
+{
+	public static List<String> getFruits(Map<String,String> numbers)
+	{
+		int sum=0;
+		List<String> list=new ArrayList<String>();
+		Set<String> key=numbers.keySet();
+		for(String k:key){
+			
+				String mob=numbers.get(k);
+				for(char ch:mob.toCharArray()){
+					sum=sum+Integer.parseInt(Character.toString(ch));
+					
+				}
+				System.out.println(sum);
+				boolean flag=true;
+				for(int i=2; i<sum; i++)
+				{
+					if(sum%i==0)
+					{					
+						flag=false;
+						break;
+					}
+				}
+				if(flag)
+					list.add(k);
+				sum=0;
+			}
+			
+		//Write a program to get a map contains people name and mobile numbers as string.
+		//Find the persons having lucky mobile numbers.
+		//Lucky mobile numbers are found by find the sum of digits in a mobile number and check whether the sum is a prime or not.
+		//If prime Its a lucky number.
+		//return those persons as a list
+	
+		return list;
+	}
+}
+
+import java.util.Map;
+import java.util.TreeMap;
+
+public class Main 
+{
+	public static void main(String[] args) 
+	{
+		Map<String,String> numbers=new TreeMap<String,String>();
+		numbers.put("Tuttu", "8989898989");
+		numbers.put("Pappi", "9500095111");
+		numbers.put("Luttu", "8995685222");
+		numbers.put("Kuttu", "7275895621");
+		numbers.put("Chittu", "5896354123");
+		
+		System.out.println(ProgramCode.getFruits(numbers));		
+	}
+}
+
+************************************************************************************************************************************
+6.//create char array of 10,create string and initialise with techm and reverse it and store in char array
+		char c[]=new char[10];
+		String reverse="";
+		String s="Techm";
+		for(int i=s.length()-1;i>=0;i--){
+			reverse=reverse+s.charAt(i);
+		}
+		for(int j=0;j<reverse.length();j++){
+			c[j]=reverse.charAt(j);
+		}
+		System.out.println(c);
+		System.out.println("-----------------------------------------------------------------------------------------");
+			
+		
+	//create a set(raw) and add values,find sum of elements in set,store the set values in integer array
+		int sum=0;
+		int i=0;
+		Set set=new HashSet();
+	    set.add(10);
+	    set.add(20);
+	    set.add(30);
+	    Iterator it=set.iterator();
+	    while(it.hasNext()){
+	    	sum=sum+Integer.parseInt(it.next().toString());
+	    	
+	    }
+	    System.out.println(sum);
+	    
+	    int a[]=new int[set.size()];
+	    Iterator it1=set.iterator();
+	    for(int j=0;j<set.size();j++)
+	    {
+	    	a[j]=Integer.parseInt(it1.next().toString());
+	    }
+	    System.out.println(Arrays.toString(a));
+		System.out.println("-----------------------------------------------------------------------------------------");
+
+	    
+	    
+	    //create a list of string add values,create a set and add values,add list values as values and set values as key in map of <String,String>
+	    
+	    int b=0;
+	    List<String> l=new ArrayList<String>();
+	    l.add("ONE");
+	    l.add("TWO");
+	    l.add("THREE");
+	    Set<String> sett=new HashSet<String>();
+	    sett.add("NOSE");
+	    sett.add("EYE");
+	    sett.add("HEART");
+	    Map<String,String> map=new HashMap<String,String>();
+	    Iterator iterator=sett.iterator();
+	    while(iterator.hasNext()){
+	    	map.put((String) iterator.next(),l.get(b));
+	    	b++;
+	    }
+	    System.out.println(map);
+		System.out.println("-----------------------------------------------------------------------------------------");
+
+	        
+		//create a date object,display date in following format 14-Aug-2019 226-Aug-2019
+	    
+	    Date d=new Date();
+	    SimpleDateFormat sf1=new SimpleDateFormat("dd-MMM-yyyy");
+	    SimpleDateFormat sf2=new SimpleDateFormat("DDD-MMM-yyyy");
+        System.out.println(sf1.format(d));
+        System.out.println(sf2.format(d));
+
+		//create a string,initialize with ABC123,make all digits in beginning 123ABC
+        
+        String str="ABC123";
+        StringBuffer sr1=new StringBuffer();
+        StringBuffer sr2=new StringBuffer();
+        for(int f=0;f<str.length();f++)
+        {
+        	Character cha=str.charAt(f);
+        	if(cha.isDigit(cha)){
+        		sr1.append(cha);
+        	}
+        	else{
+        		sr2.append(cha);
+        	}
+        }
+        System.out.println(sr1.append(sr2));
+		System.out.println("-----------------------------------------------------------------------------------------");
+
+		
+        //create two list and add values,presence only the common elements in list1
+        
+        List<String> list1=new ArrayList<String>();
+        list1.add("ONE");
+        list1.add("TWO");
+        list1.add("THREE");
+        list1.add("FIVE");
+        list1.add("NINE");
+        List<String> list2=new ArrayList<String>();
+		list2.add("THREE");
+        list2.add("FIVE");
+        list2.add("NINE");
+        list1.retainAll(list2);
+        System.out.println(list1);
+		System.out.println("-----------------------------------------------------------------------------------------");
+
+		
+		//create a map of two strings,add values,print the opener2,print the values,change opener to rahul
+		
+		Map<String,String> maps=new HashMap<String,String>();
+		maps.put("opener","rohit");
+		maps.put("opener2","Dhawan");
+		maps.put("opener3", "Kholi");
+		System.out.println(maps.get("opener2"));
+		System.out.println(maps.values());
+		maps.put("opener", "Rahul");
+		System.out.println(maps);
+       for(Map.Entry m:maps.entrySet()){
+    	   System.out.println(m.getKey());//to get key simultaneous to value
+    	   System.out.println(m.getValue());//to get Value
+       }
+       Collection<String> col=maps.values();
+       for(String st:col){
+    	   System.out.println(st);//to get values
+       }
+		System.out.println("-----------------------------------------------------------------------------------------");
+
+		//
+		
+		
+		
+	6. //Write a program to create a map contain feedback of all english and maths teachers together.
+		//If the teacher teaches both subjects , add the maximum FB in the final map. 
+	    Map<String,Integer> finalFB=new TreeMap<String,Integer>();
+		finalFB.putAll(english);
+		Set<String> key=maths.keySet();
+		
+		for(String k: key)
+		{
+			if(finalFB.containsKey(k))
+			{
+				int val=finalFB.get(k);
+				int val2=maths.get(k);
+				if(val>val2)
+					finalFB.put(k, val);
+				else
+					finalFB.put(k, val2);	
+			}
+			else
+			{
+				finalFB.put(k, maths.get(k));
+			}
+		}
+		
+		
+		return finalFB;
+		
+	}
+	
+}
+
+import java.util.Map;
+import java.util.TreeMap;
+
+public class Main 
+{
+	public static void main(String[] args) 
+	{
+		Map<String,Integer> englishFB=new TreeMap<String,Integer>();
+		englishFB.put("Ram",90);
+		englishFB.put("Kukku",78);
+		englishFB.put("Lachu",81);
+		englishFB.put("Devan",89);
+		englishFB.put("Pappi",77);
+		
+		
+		Map<String,Integer> mathsFB=new TreeMap<String,Integer>();
+		mathsFB.put("Losliya",90);
+		mathsFB.put("Santi",78);
+		mathsFB.put("Ram",81);
+		mathsFB.put("Nakul",85);
+		mathsFB.put("Pappi",90);
+		
+		System.out.println(ProgramCode.getFeedback(englishFB, mathsFB));		
+	}
+}
+
+***************************************************************************************************************************************************************************************************
