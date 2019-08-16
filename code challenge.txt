@@ -542,3 +542,64 @@ public class Main
 	}
 }
 ************************************************************************************************************************
+8.
+public class ProgramCode 
+{
+	public static String decrypt(String encrypted)
+	{
+		/*
+		 * WAP to accept and encrypted string and return the decrypted value based on the following rule.
+		 * 1.conevrt each digit pair to characters.
+		 * 2.Convert the following special characters to the corresponding character as below.
+		 * 			@ - a
+		 * 			$ - s
+		 * 			0 - o
+		 * 			& - and
+		 * 3. Sample Testcase:
+		 * 			6566673648		- ABC$0  - ABCso
+		 * */
+				
+		StringBuffer sb=new StringBuffer();
+		char c = 0;
+		for(int i=0;i<encrypted.length();i=i+2){
+			String s=encrypted.substring(i,i+2);
+			int a=Integer.parseInt(s);
+			c=(char) a;
+
+			switch(c)
+			{
+			case '@':
+				sb.append("a");
+				break;
+			
+			case '$':
+				sb.append("s");
+				break;
+			
+			case '0':
+				sb.append("o");
+				break;
+			
+			case '&':
+				sb.append("and");
+				break;
+			
+			default:
+			   sb.append(c);
+		}
+		
+	}
+		return sb.toString();
+	}
+}
+
+public class Main 
+{
+	public static void main(String[] args) 
+	{
+		String encrypted="6566673648";
+		System.out.println(ProgramCode.decrypt(encrypted));		
+	}
+}
+
+***************************************************************************************************************************************
