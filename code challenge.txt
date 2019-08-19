@@ -723,32 +723,36 @@ public class ProgramCode
 		SimpleDateFormat sd1=new SimpleDateFormat("DDD");
 		int d1=Integer.parseInt(sd1.format(day));
 		int d2=Integer.parseInt(sd1.format(today));
+		System.out.println(d1);
+    	System.out.println(d2);
         if(d1>d2){
         	d1=d1-d2;
         }
         else{
-        	d2+=365;
-        	System.out.println(d2);
+        	d2=365-d2;
+        	
         	System.out.println(d1);
-        	d1=d2-d1;
+        	System.out.println(d2);
+        	d1+=d2;
         }
 		SimpleDateFormat sd2=new SimpleDateFormat("yyyy");
 int i=Integer.parseInt(sd2.format(day));
-if(i%400==0){
+if((i%4==0)&&(i%100!=0)||(i%400==0)){
+	
 	flag=true;
 }
-if(i%100==0){
-	flag=false;
-}if(i%4==0){
-	flag=true;
-}
-if(flag){
+
+if(flag)
+{
 	d1=d1-1;
 }
-		System.out.println(d1);
+		System.out.println("Days remaining for Next B Day :"+d1);
 	
 	
 		
+
+	
+	//for reference	
 	Calendar c=Calendar.getInstance();
 	c.setTime(day);
 	c.set(Calendar.YEAR,2019);
