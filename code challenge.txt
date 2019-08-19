@@ -603,3 +603,175 @@ public class Main
 }
 
 ***************************************************************************************************************************************
+9.
+public class ProgramCode 
+{
+	public static int largestSpan(int[] array)
+	{
+
+	/*
+	 * Find the largest 'span'(span is the number of elements between two same digits) find their sum.
+		a[]={1,4,2,1,4,1,5}
+		Largest span=5
+	 */
+
+		int count=1;
+		int max=1;
+		for(int i=0;i<array.length;i++){
+			
+			for(int j=i+1;j<array.length;j++){
+				
+				if(array[i]==array[j]){
+					count++;
+					max=count;
+					
+					}
+				}
+			}
+		return max;
+	}
+}
+
+		
+public class Main 
+{
+	public static void main(String[] args) 
+	{
+		int a[]={1,4,2,1,4,1,5};
+		System.out.println(ProgramCode.largestSpan(a));		
+	}
+}
+
+******************************************************************************************************************************************
+10.
+import java.util.StringTokenizer;
+
+public class ProgramCode 
+{
+	public static int findVowCountInSentence(String sent)
+	{
+		
+	/*Take the word with a max length in a given sentence  ,check for vowels in that and count the no.of occurrences !
+  	Input 1="Tomorrow never dies"
+  	Output =3
+ 	 */
+         
+         String s="";
+ 	 int sum=0;
+ 	 int count=0;int maxlength=0;
+		String r=null;
+ 	 
+ 	 StringTokenizer st=new StringTokenizer(sent," ");
+		while(st.hasMoreTokens()){
+			 s=st.nextToken();
+			 if(s.length()>=maxlength){
+				 maxlength=s.length();
+				 r=s;
+				 System.out.println(r);
+				 sum=0;
+				 for(int i=0;i<s.length();i++){
+						char c=s.charAt(i);
+						if(c=='a' || c=='e' || c=='i'|| c=='o'|| c=='u'){
+						sum++;
+					}
+						
+				}
+				 if(sum>count){
+						count=sum;
+					}
+			}
+			 }
+		return count;
+}
+}
+
+public class Main 
+{
+	public static void main(String[] args) 
+	{
+		String sent="The road to success and the road to failure are almost exactly the same";
+		System.out.println(ProgramCode.findVowCountInSentence(sent));		
+	}
+}
+
+************************************************************************************************************************************
+11.
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
+public class ProgramCode 
+{
+	public static void findBDay(String dob) throws ParseException
+	{
+		/*WAP to accept a DOB as string and display the the Day Name of Birth.
+		 * Also displays the no of days for next birthday.
+		 * Sample : 20-Aug-2000
+		 * Display : 
+		 * 	Born on  SUNDAY.
+		 *  Days remaining for Next B Day : 1 
+		 * 
+		 */		
+		boolean flag=false;
+		Date day=new SimpleDateFormat("dd-MM-yyyy").parse(dob);
+		SimpleDateFormat sd=new SimpleDateFormat("EEEE");
+		System.out.println("Born on "+sd.format(day));
+		
+		
+		Date today=new Date();
+		SimpleDateFormat sd1=new SimpleDateFormat("DDD");
+		int d1=Integer.parseInt(sd1.format(day));
+		int d2=Integer.parseInt(sd1.format(today));
+        if(d1>d2){
+        	d1=d1-d2;
+        }
+        else{
+        	d2+=365;
+        	System.out.println(d2);
+        	System.out.println(d1);
+        	d1=d2-d1;
+        }
+		SimpleDateFormat sd2=new SimpleDateFormat("yyyy");
+int i=Integer.parseInt(sd2.format(day));
+if(i%400==0){
+	flag=true;
+}
+if(i%100==0){
+	flag=false;
+}if(i%4==0){
+	flag=true;
+}
+if(flag){
+	d1=d1-1;
+}
+		System.out.println(d1);
+	
+	
+		
+	Calendar c=Calendar.getInstance();
+	c.setTime(day);
+	c.set(Calendar.YEAR,2019);
+	Date d=c.getTime();
+	
+	long diff=(d.getTime()-today.getTime())/(24 * 60 * 60 * 1000);
+	if(diff<0)
+	{
+		diff=diff+365;
+	}
+	System.out.println(diff);
+}
+}
+
+import java.text.ParseException;
+
+public class Main 
+{
+	public static void main(String[] args) throws ParseException 
+	{a
+	ProgramCode.findBDay("01-08-2001");		
+	}
+}
+
+****************************************************************************************************************************************
+
